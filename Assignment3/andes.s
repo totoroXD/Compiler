@@ -6,28 +6,18 @@ sub:
     push.s {$fp $lp}
     addi $fp, $sp, 8
     addi $sp, $sp, -24
-    swi $r27,[$fp+(-8)]
-    swi $r26,[$fp+(-12)]
+    swi $r27,[$fp+(-12)]
+    swi $r26,[$fp+(-16)]
     movi $r0, 0
-    swi $r0,[$fp+(-16)]
-
-    movi $r0, 1
     swi $r0,[$fp+(-20)]
 
-    lwi $r0,[$fp+(-12)]
-    swi $r0,[$sp]
-    addi $sp, $sp, -4
-    lwi $r0,[$fp+(-8)]
-    swi $r0,[$sp]
-    addi $sp, $sp, -4
-
-    lwi $r0,[$sp+8]
-    lwi $r1,[$sp+4]
-    sub $r0, $r0, $r1
-    swi $r0,[$sp+8]
-    addi $sp, $sp, 4
+    movi $r0, 1
+    swi $r0,[$fp+(-24)]
 
     lwi $r0,[$fp+(-16)]
+    swi $r0,[$sp]
+    addi $sp, $sp, -4
+    lwi $r0,[$fp+(-12)]
     swi $r0,[$sp]
     addi $sp, $sp, -4
 
@@ -38,6 +28,16 @@ sub:
     addi $sp, $sp, 4
 
     lwi $r0,[$fp+(-20)]
+    swi $r0,[$sp]
+    addi $sp, $sp, -4
+
+    lwi $r0,[$sp+8]
+    lwi $r1,[$sp+4]
+    sub $r0, $r0, $r1
+    swi $r0,[$sp+8]
+    addi $sp, $sp, 4
+
+    lwi $r0,[$fp+(-24)]
     swi $r0,[$sp]
     addi $sp, $sp, -4
 
@@ -58,13 +58,13 @@ main:
     addi $fp, $sp, 8
     addi $sp, $sp, -24
     movi $r0, 1
-    swi $r0,[$fp+(-12)]
-
-    movi $r0, 2
     swi $r0,[$fp+(-16)]
 
-    movi $r0, 3
+    movi $r0, 2
     swi $r0,[$fp+(-20)]
+
+    movi $r0, 3
+    swi $r0,[$fp+(-24)]
 
     movi $r0, 10
     swi $r0,[$sp]
@@ -78,10 +78,10 @@ main:
     swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
-    swi $r0,[$fp+(-8)]
+    swi $r0,[$fp+(-12)]
     addi $sp, $sp, 4
 
-    lwi $r0,[$fp+(-12)]
+    lwi $r0,[$fp+(-16)]
     swi $r0,[$sp]
     addi $sp, $sp, -4
     movi $r0, 3
@@ -115,7 +115,7 @@ main:
     addi $sp, $sp, 4
 
 
-    swi $r0,[$fp+(-16)]
+    swi $r0,[$fp+(-20)]
     addi $sp, $sp, 4
 
     movi $r0, 10
@@ -130,7 +130,7 @@ main:
     addi $sp, $sp, 4
     jal sub
 
-    swi $r0,[$fp+(-12)]
+    swi $r0,[$fp+(-16)]
     addi $sp, $sp, 4
 
     movi $r0, 0

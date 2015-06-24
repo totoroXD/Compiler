@@ -23,7 +23,7 @@ int yylex();
 void yyerror(const char *s);
 FILE *f_asm;
 
-int cnt=0,off=-8,argcnt=0;
+int cnt=0,off=-12,argcnt=0;
 
 struct Entry{
     int offset;
@@ -302,7 +302,7 @@ int vof(const char *vname){
 }
 
 void func_start(const char *s){
-    off=-8;
+    off=-12;
     argcnt=0;
     fprintf(f_asm, "%s:\n",s);
     fprintf(f_asm, "    push.s {$fp $lp}\n");
