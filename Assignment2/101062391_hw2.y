@@ -58,9 +58,9 @@ stmt_list : statement stmt_list {printf("stmt_list -> statement stmt_list\n");}
         | {printf("stmt_list -> empty\n");}
         ;
 statement : RETURN expression ';' {printf("statement -> return expression';'\n");}
-        | ID '=' expression {printf("statement -> ID '=' expression\n");}
+        | ID '=' statement {printf("statement -> ID '=' expression\n");}
         | expression {printf("statement -> expression\n"); }
-        | '{' statement'}' {printf("statement -> {statement}';'\n");}
+        | '{' stmt_list'}' {printf("statement -> {stmt_list}';'\n");}
         | expression ';' {printf("statement -> expression';'\n");}
         | var_dec ';' {printf("statement -> var_dec ';'\n");}
         ;
@@ -68,8 +68,8 @@ statement : RETURN expression ';' {printf("statement -> return expression';'\n")
 expression : 
         | expression '+' expression {$$ = $1+$3;printf("expression -> expression '+' expression\n");}
         | expression '-' expression {$$ = $1+$3;printf("expression -> expression '-' expression\n");}
-        | expression '*' expression {$$ = $1+$3;printf("expression -> expression '+' expression\n");}
-        | expression '/' expression {$$ = $1+$3;printf("expression -> expression '-' expression\n");}
+        | expression '*' expression {$$ = $1+$3;printf("expression -> expression '*' expression\n");}
+        | expression '/' expression {$$ = $1+$3;printf("expression -> expression '/' expression\n");}
         | INT {$$ = $1;printf("expression -> INT\n");}
         | CHAR {$$ = $1;printf("expression -> CHAR\n");} 
         | ID {printf("expression -> ID\n");}

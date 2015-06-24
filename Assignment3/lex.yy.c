@@ -487,8 +487,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "101062391_hw2.l"
-#line 2 "101062391_hw2.l"
+#line 1 "101062391_hw3.l"
+#line 2 "101062391_hw3.l"
 #include "y.tab.h"
 int count=1;
 
@@ -679,7 +679,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 14 "101062391_hw2.l"
+#line 14 "101062391_hw3.l"
 
 
 
@@ -768,34 +768,34 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "101062391_hw2.l"
+#line 17 "101062391_hw3.l"
 BEGIN INITIAL;
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 18 "101062391_hw2.l"
+#line 18 "101062391_hw3.l"
 count++, printf("\t#%d comment\n",count);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "101062391_hw2.l"
+#line 19 "101062391_hw3.l"
 ;
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 20 "101062391_hw2.l"
+#line 20 "101062391_hw3.l"
 BEGIN INITIAL, count++;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "101062391_hw2.l"
+#line 21 "101062391_hw3.l"
 ;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "101062391_hw2.l"
+#line 22 "101062391_hw3.l"
 {
 	printf("\t#%d character: %c\n",count,yytext[0]);
 	printf("\t#%d '\n",count);
@@ -806,7 +806,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 29 "101062391_hw2.l"
+#line 29 "101062391_hw3.l"
 {
 	yytext[strlen(yytext)-1]='\0';
 	printf("\t#%d %s loop\n",count,yytext);
@@ -815,32 +815,32 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 34 "101062391_hw2.l"
+#line 34 "101062391_hw3.l"
 BEGIN COMMENT, printf("\t#%d comment\n",count);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 35 "101062391_hw2.l"
+#line 35 "101062391_hw3.l"
 BEGIN LINECOMMENT, printf("\t#%d comment\n",count);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 36 "101062391_hw2.l"
+#line 36 "101062391_hw3.l"
 BEGIN CHARACTER, printf("\t#%d : '\n",count);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 37 "101062391_hw2.l"
+#line 37 "101062391_hw3.l"
 ;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 38 "101062391_hw2.l"
+#line 38 "101062391_hw3.l"
 {printf("\t#%d operator: %s\n",count,yytext); return yytext[0];}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 39 "101062391_hw2.l"
+#line 39 "101062391_hw3.l"
 {
     printf("\t#%d return\n",count);
     return RETURN;
@@ -848,7 +848,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 43 "101062391_hw2.l"
+#line 43 "101062391_hw3.l"
 {
     printf("\t#%d data type: %s\n",count,yytext);
     return TYPE;
@@ -856,15 +856,16 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 47 "101062391_hw2.l"
+#line 47 "101062391_hw3.l"
 {
     printf("\t#%d ID: %s\n",count,yytext);
+    strcpy(yylval.sval, yytext);
     return ID;
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 51 "101062391_hw2.l"
+#line 52 "101062391_hw3.l"
 {
     printf("\t#%d number: %s\n",count,yytext); 
     yylval.ival=atoi(yytext);
@@ -873,26 +874,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 56 "101062391_hw2.l"
+#line 57 "101062391_hw3.l"
 {printf("\t#%d %s\n",count,yytext);return yytext[0];}
 	YY_BREAK
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 57 "101062391_hw2.l"
+#line 58 "101062391_hw3.l"
 count++; //Record lines here
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 58 "101062391_hw2.l"
+#line 59 "101062391_hw3.l"
 
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 60 "101062391_hw2.l"
+#line 61 "101062391_hw3.l"
 ECHO;
 	YY_BREAK
-#line 896 "lex.yy.c"
+#line 897 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMENT):
 case YY_STATE_EOF(LINECOMMENT):
@@ -1889,7 +1890,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 60 "101062391_hw2.l"
+#line 61 "101062391_hw3.l"
 
 
 

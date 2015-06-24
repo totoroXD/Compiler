@@ -13,14 +13,10 @@ int main(){
   int b=1;
   double c=0;
   char d='x';
-  int *ptr;
-  int ar[111];
   // statements
   a = 10/2;
   c = (b+3)*4-5;
   b = sub(10,8);
-  for(i=0; i<10; i++)
-    a=a+i;
   return a;
 
 }
