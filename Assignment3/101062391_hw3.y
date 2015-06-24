@@ -57,13 +57,13 @@ function_call : ID {argcnt=0;}
 parameters : expression {
                 printf("parameters -> expression\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
 
             }
-        | expression ',' parameters {
+        | parameters ',' expression {
                 printf("parameters -> expression ',' parameters\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
             }
         | 
         ;

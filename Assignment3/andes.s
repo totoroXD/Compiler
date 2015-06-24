@@ -121,13 +121,13 @@ main:
     movi $r0, 10
     swi $r0,[$sp]
     addi $sp, $sp, -4
+    lwi $r0,[$sp+4]
+    addi $sp, $sp, 4
     movi $r0, 8
     swi $r0,[$sp]
     addi $sp, $sp, -4
-    lwi $r0,[$sp+4]
-    addi $sp, $sp, -4
     lwi $r1,[$sp+4]
-    addi $sp, $sp, -4
+    addi $sp, $sp, 4
     jal sub
 
     swi $r0,[$fp+(-12)]
