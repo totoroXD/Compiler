@@ -57,13 +57,13 @@ function_call : ID {argcnt=0;}
 parameters : expression {
                 printf("parameters -> expression\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
 
             }
         | expression ',' parameters {
                 printf("parameters -> expression ',' parameters\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
             }
         | 
         ;
@@ -92,7 +92,7 @@ id_list : ID_dec ',' id_list {printf("id_list -> ID '=' expression\n");}
 ID_dec : ID option{
                 install($1);
                 //fprintf(f_asm, "%s\n",$1);
-                fprintf(f_asm, "    addi $r0, %d\n",$2);
+                fprintf(f_asm, "    movi $r0, %d\n",$2);
                 fprintf(f_asm, "    swi $r0,[$fp+(%d)]\n", vof($1));
                 fprintf(f_asm, "\n");
             }
@@ -125,7 +125,7 @@ expression :
                 printf("%s\n",$1);
                 fprintf(f_asm, "\n");
                 fprintf(f_asm, "    swi $r0,[$fp+(%d)]\n", vof($1));
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
         | expression '+' expression {
@@ -135,7 +135,7 @@ expression :
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    add $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
         | expression '-' expression {
@@ -145,7 +145,7 @@ expression :
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    sub $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
         | expression '*' expression {
@@ -155,7 +155,7 @@ expression :
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    mul $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
         | expression '/' expression {
@@ -164,13 +164,13 @@ expression :
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    div $r0, $r0, $r1\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, +4\n");
             }
         | INT {
                 printf("expression -> INT\n");
                 fprintf(f_asm, "    movi $r0, %d\n", $1);
                 fprintf(f_asm, "    swi $r0,[$sp]\n");
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
                 $$=$1;
             }
         | CHAR {$$ = $1;printf("expression -> CHAR\n");} 
@@ -178,7 +178,7 @@ expression :
                 printf("expression -> ID\n");
                 fprintf(f_asm, "    lwi $r0,[$fp+(%d)]\n", vof($1));
                 fprintf(f_asm, "    swi $r0,[$sp]\n");
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
             }
         | '(' expression ')' {printf("expression -> '(' expression ')'\n");}
         | function_call {printf("expression -> function_call\n");}

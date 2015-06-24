@@ -564,7 +564,7 @@ case 7:
 	{
                 printf("parameters -> expression\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
 
             }
 break;
@@ -573,7 +573,7 @@ case 8:
 	{
                 printf("parameters -> expression ',' parameters\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
             }
 break;
 case 10:
@@ -615,7 +615,7 @@ case 16:
 	{
                 install(yystack.l_mark[-1].sval);
                 /*fprintf(f_asm, "%s\n",$1);*/
-                fprintf(f_asm, "    addi $r0, %d\n",yystack.l_mark[0].ival);
+                fprintf(f_asm, "    movi $r0, %d\n",yystack.l_mark[0].ival);
                 fprintf(f_asm, "    swi $r0,[$fp+(%d)]\n", vof(yystack.l_mark[-1].sval));
                 fprintf(f_asm, "\n");
             }
@@ -675,7 +675,7 @@ case 27:
                 printf("%s\n",yystack.l_mark[-2].sval);
                 fprintf(f_asm, "\n");
                 fprintf(f_asm, "    swi $r0,[$fp+(%d)]\n", vof(yystack.l_mark[-2].sval));
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
 break;
@@ -688,7 +688,7 @@ case 28:
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    add $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
 break;
@@ -701,7 +701,7 @@ case 29:
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    sub $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
 break;
@@ -714,7 +714,7 @@ case 30:
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    mul $r0, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
 break;
@@ -726,7 +726,7 @@ case 31:
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    div $r0, $r0, $r1\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, +4\n");
             }
 break;
 case 32:
@@ -735,7 +735,7 @@ case 32:
                 printf("expression -> INT\n");
                 fprintf(f_asm, "    movi $r0, %d\n", yystack.l_mark[0].ival);
                 fprintf(f_asm, "    swi $r0,[$sp]\n");
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
                 yyval.ival=yystack.l_mark[0].ival;
             }
 break;
@@ -749,7 +749,7 @@ case 34:
                 printf("expression -> ID\n");
                 fprintf(f_asm, "    lwi $r0,[$fp+(%d)]\n", vof(yystack.l_mark[0].sval));
                 fprintf(f_asm, "    swi $r0,[$sp]\n");
-                fprintf(f_asm, "    addi $sp, -4\n");
+                fprintf(f_asm, "    addi $sp, $sp, -4\n");
             }
 break;
 case 35:
