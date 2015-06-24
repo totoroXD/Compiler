@@ -24,7 +24,7 @@ sub:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     sub $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
     lwi $r0,[$fp+(-16)]
@@ -34,7 +34,7 @@ sub:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     sub $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
     lwi $r0,[$fp+(-20)]
@@ -44,7 +44,7 @@ sub:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     sub $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
     addi $sp, $fp, -8
@@ -75,7 +75,7 @@ main:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     divsr $r0, $r7, $r0, $r1
-    lwi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, +4
 
     swi $r0,[$fp+(-8)]
@@ -91,7 +91,7 @@ main:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     add $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
     movi $r0, 4
@@ -101,7 +101,7 @@ main:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     mul $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
     movi $r0, 5
@@ -111,7 +111,7 @@ main:
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
     sub $r0, $r0, $r1
-    swi $r1,[$sp+8]
+    swi $r0,[$sp+8]
     addi $sp, $sp, 4
 
 
