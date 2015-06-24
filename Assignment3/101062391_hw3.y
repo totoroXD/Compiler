@@ -60,7 +60,7 @@ parameters : expression {
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
 
             }
-        | parameters ',' expression {
+        | expression ','  parameters {
                 printf("parameters -> expression ',' parameters\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
