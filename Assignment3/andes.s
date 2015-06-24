@@ -74,7 +74,7 @@ main:
     addi $sp, $sp, -4
     lwi $r0,[$sp+8]
     lwi $r1,[$sp+4]
-    divsr $r0, $7, $r0, $r1
+    divsr $r0, $r7, $r0, $r1
     lwi $r1,[$sp+8]
     addi $sp, $sp, +4
 
