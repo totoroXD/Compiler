@@ -134,7 +134,7 @@ expression :
                 fprintf(f_asm, "    lwi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    add $r0, $r0, $r1\n");
-                fprintf(f_asm, "    swi $r1,[$sp+8]\n");
+                fprintf(f_asm, "    swi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
@@ -144,7 +144,7 @@ expression :
                 fprintf(f_asm, "    lwi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    sub $r0, $r0, $r1\n");
-                fprintf(f_asm, "    swi $r1,[$sp+8]\n");
+                fprintf(f_asm, "    swi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
@@ -154,7 +154,7 @@ expression :
                 fprintf(f_asm, "    lwi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    mul $r0, $r0, $r1\n");
-                fprintf(f_asm, "    swi $r1,[$sp+8]\n");
+                fprintf(f_asm, "    swi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
                 fprintf(f_asm, "\n");
             }
@@ -163,7 +163,7 @@ expression :
                 fprintf(f_asm, "    lwi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    divsr $r0, $r7, $r0, $r1\n");
-                fprintf(f_asm, "    lwi $r1,[$sp+8]\n");
+                fprintf(f_asm, "    swi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    addi $sp, $sp, +4\n");
             }
         | INT {
