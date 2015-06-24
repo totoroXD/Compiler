@@ -6,8 +6,8 @@ sub:
     push.s {$fp $lp}
     addi $fp, $sp, 8
     addi $sp, $sp, -24
-    swi $r0,[$fp+(-8)]
-    swi $r1,[$fp+(-12)]
+    swi $r27,[$fp+(-8)]
+    swi $r26,[$fp+(-12)]
     movi $r0, 0
     swi $r0,[$fp+(-16)]
 
@@ -76,7 +76,7 @@ main:
     lwi $r1,[$sp+4]
     divsr $r0, $r7, $r0, $r1
     swi $r0,[$sp+8]
-    addi $sp, $sp, +4
+    addi $sp, $sp, 4
 
     swi $r0,[$fp+(-8)]
     addi $sp, $sp, 4
@@ -121,12 +121,12 @@ main:
     movi $r0, 10
     swi $r0,[$sp]
     addi $sp, $sp, -4
-    lwi $r0,[$sp+4]
+    lwi $r27,[$sp+4]
     addi $sp, $sp, 4
     movi $r0, 8
     swi $r0,[$sp]
     addi $sp, $sp, -4
-    lwi $r1,[$sp+4]
+    lwi $r26,[$sp+4]
     addi $sp, $sp, 4
     jal sub
 

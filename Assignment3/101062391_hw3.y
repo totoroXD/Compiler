@@ -56,13 +56,13 @@ function_call : ID {argcnt=0;}
         ;
 parameters : expression {
                 printf("parameters -> expression\n");
-                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
+                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
 
             }
         | parameters ',' expression {
                 printf("parameters -> expression ',' parameters\n");
-                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
+                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
             }
         | 
@@ -72,13 +72,13 @@ para_dec :
           TYPE ID ',' para_dec {
                 printf("para_dec -> TYPE ID ',' parameters\n");
                 install($2);
-                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", argcnt,vof($2));
+                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof($2));
                 argcnt++;
             }
         | TYPE ID {
                 printf("para_dec -> TYPE ID para_dec\n");
                 install($2);
-                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", argcnt, vof($2));
+                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt, vof($2));
                 argcnt++;
             }
         | {printf("para_dec -> empty\n");}
@@ -164,7 +164,7 @@ expression :
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    divsr $r0, $r7, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r0,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
             }
         | INT {
                 printf("expression -> INT\n");

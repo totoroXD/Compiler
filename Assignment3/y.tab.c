@@ -564,7 +564,7 @@ case 7:
 #line 57 "101062391_hw3.y"
 	{
                 printf("parameters -> expression\n");
-                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
+                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
 
             }
@@ -573,7 +573,7 @@ case 8:
 #line 63 "101062391_hw3.y"
 	{
                 printf("parameters -> expression ',' parameters\n");
-                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",argcnt++);
+                fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
             }
 break;
@@ -582,7 +582,7 @@ case 10:
 	{
                 printf("para_dec -> TYPE ID ',' parameters\n");
                 install(yystack.l_mark[-2].sval);
-                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", argcnt,vof(yystack.l_mark[-2].sval));
+                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof(yystack.l_mark[-2].sval));
                 argcnt++;
             }
 break;
@@ -591,7 +591,7 @@ case 11:
 	{
                 printf("para_dec -> TYPE ID para_dec\n");
                 install(yystack.l_mark[0].sval);
-                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", argcnt, vof(yystack.l_mark[0].sval));
+                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt, vof(yystack.l_mark[0].sval));
                 argcnt++;
             }
 break;
@@ -727,7 +727,7 @@ case 31:
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
                 fprintf(f_asm, "    divsr $r0, $r7, $r0, $r1\n");
                 fprintf(f_asm, "    swi $r0,[$sp+8]\n");
-                fprintf(f_asm, "    addi $sp, $sp, +4\n");
+                fprintf(f_asm, "    addi $sp, $sp, 4\n");
             }
 break;
 case 32:
