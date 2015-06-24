@@ -60,7 +60,7 @@ parameters : expression {
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
 
             }
-        | expression ','  parameters {
+        | parameters ',' expression {
                 printf("parameters -> expression ',' parameters\n");
                 fprintf(f_asm, "    lwi $r%d,[$sp+4]\n",27-argcnt);argcnt++;
                 fprintf(f_asm, "    addi $sp, $sp, 4\n");
@@ -69,10 +69,10 @@ parameters : expression {
         ;
 
 para_dec : 
-          TYPE ID ',' para_dec {
+          para_dec ','  TYPE ID {
                 printf("para_dec -> TYPE ID ',' parameters\n");
-                install($2);
-                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof($2));
+                install($4);
+                fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof($4));
                 argcnt++;
             }
         | TYPE ID {

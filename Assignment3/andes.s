@@ -14,10 +14,10 @@ sub:
     movi $r0, 1
     swi $r0,[$fp+(-24)]
 
-    lwi $r0,[$fp+(-16)]
+    lwi $r0,[$fp+(-12)]
     swi $r0,[$sp]
     addi $sp, $sp, -4
-    lwi $r0,[$fp+(-12)]
+    lwi $r0,[$fp+(-16)]
     swi $r0,[$sp]
     addi $sp, $sp, -4
 
@@ -121,11 +121,11 @@ main:
     movi $r0, 10
     swi $r0,[$sp]
     addi $sp, $sp, -4
+    lwi $r27,[$sp+4]
+    addi $sp, $sp, 4
     movi $r0, 8
     swi $r0,[$sp]
     addi $sp, $sp, -4
-    lwi $r27,[$sp+4]
-    addi $sp, $sp, 4
     lwi $r26,[$sp+4]
     addi $sp, $sp, 4
     jal sub
