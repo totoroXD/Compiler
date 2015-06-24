@@ -724,7 +724,7 @@ case 31:
                 printf("expression -> expression '/' expression\n");
                 fprintf(f_asm, "    lwi $r0,[$sp+8]\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+4]\n");
-                fprintf(f_asm, "    div $r0, $r0, $r1\n");
+                fprintf(f_asm, "    divsr $r0, $7, $r0, $r1\n");
                 fprintf(f_asm, "    lwi $r1,[$sp+8]\n");
                 fprintf(f_asm, "    addi $sp, $sp, +4\n");
             }
