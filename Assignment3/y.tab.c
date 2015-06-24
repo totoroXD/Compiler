@@ -325,9 +325,10 @@ int main(void){
     fprintf(f_asm, "    .type   main, @function\n");
     yyparse();
     fprintf(f_asm, "    .size   main, .-main\n");
+    fprintf(f_asm, "    GCC: (GNU) 4.9.0\n");
     return 0;
 }
-#line 331 "y.tab.c"
+#line 332 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -760,7 +761,7 @@ case 36:
 #line 184 "101062391_hw3.y"
 	{printf("expression -> function_call\n");}
 break;
-#line 764 "y.tab.c"
+#line 765 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;

@@ -223,5 +223,6 @@ int main(void){
     fprintf(f_asm, "    .type   main, @function\n");
     yyparse();
     fprintf(f_asm, "    .size   main, .-main\n");
+    fprintf(f_asm, "    GCC: (GNU) 4.9.0\n");
     return 0;
 }

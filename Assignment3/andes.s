@@ -143,3 +143,4 @@ main:
     pop.s {$fp $lp}
     ret
     .size   main, .-main
+    GCC: (GNU) 4.9.0
