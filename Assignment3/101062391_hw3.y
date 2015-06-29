@@ -4,7 +4,7 @@ int yylex();
 void yyerror(const char *s);
 FILE *f_asm;
 
-int cnt=0,off=-12,argcnt=0;
+int cnt=0,off=-12,argcnt=0,p_off=-20;
 
 struct Entry{
     int offset;
@@ -71,13 +71,13 @@ parameters : expression {
 para_dec : 
           para_dec ','  TYPE ID {
                 printf("para_dec -> TYPE ID ',' parameters\n");
-                install($4);
+                install_para($4);
                 fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof($4));
                 argcnt++;
             }
         | TYPE ID {
                 printf("para_dec -> TYPE ID para_dec\n");
-                install($2);
+                install_para($2);
                 fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt, vof($2));
                 argcnt++;
             }
@@ -191,6 +191,14 @@ void install(const char *vname){
     off-=4;
     cnt++;
 }
+
+void install_para(const char *vname){
+    table[cnt].offset=p_off;
+    strcpy(table[cnt].name, vname);
+    //fprintf(f_asm, "    install_para %s\n",vname);
+    p_off-=4;
+    cnt++;
+}
 int vof(const char *vname){
     int i;
     for(i=0; i<cnt; i++)
@@ -201,6 +209,7 @@ int vof(const char *vname){
 
 void func_start(const char *s){
     off=-12;
+    p_off=-20;
     argcnt=0;
     fprintf(f_asm, "%s:\n",s);
     fprintf(f_asm, "    push.s {$fp $lp}\n");

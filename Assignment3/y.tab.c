@@ -23,7 +23,7 @@ int yylex();
 void yyerror(const char *s);
 FILE *f_asm;
 
-int cnt=0,off=-12,argcnt=0;
+int cnt=0,off=-12,argcnt=0,p_off=-20;
 
 struct Entry{
     int offset;
@@ -293,6 +293,14 @@ void install(const char *vname){
     off-=4;
     cnt++;
 }
+
+void install_para(const char *vname){
+    table[cnt].offset=p_off;
+    strcpy(table[cnt].name, vname);
+    //fprintf(f_asm, "    install %s\n",vname);
+    p_off-=4;
+    cnt++;
+}
 int vof(const char *vname){
     int i;
     for(i=0; i<cnt; i++)
@@ -303,6 +311,7 @@ int vof(const char *vname){
 
 void func_start(const char *s){
     off=-12;
+    p_off=-20;
     argcnt=0;
     fprintf(f_asm, "%s:\n",s);
     fprintf(f_asm, "    push.s {$fp $lp}\n");
@@ -328,7 +337,7 @@ int main(void){
     fprintf(f_asm, "    .ident  \"GCC: (GNU) 4.9.0\"\n");
     return 0;
 }
-#line 332 "y.tab.c"
+#line 341 "y.tab.c"
 
 #if YYDEBUG
 #include <stdio.h>		/* needed for printf */
@@ -581,7 +590,7 @@ case 10:
 #line 72 "101062391_hw3.y"
 	{
                 printf("para_dec -> TYPE ID ',' parameters\n");
-                install(yystack.l_mark[0].sval);
+                install_para(yystack.l_mark[0].sval);
                 fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt,vof(yystack.l_mark[0].sval));
                 argcnt++;
             }
@@ -590,7 +599,7 @@ case 11:
 #line 78 "101062391_hw3.y"
 	{
                 printf("para_dec -> TYPE ID para_dec\n");
-                install(yystack.l_mark[0].sval);
+                install_para(yystack.l_mark[0].sval);
                 fprintf(f_asm, "    swi $r%d,[$fp+(%d)]\n", 27-argcnt, vof(yystack.l_mark[0].sval));
                 argcnt++;
             }
@@ -761,7 +770,7 @@ case 36:
 #line 184 "101062391_hw3.y"
 	{printf("expression -> function_call\n");}
 break;
-#line 765 "y.tab.c"
+#line 774 "y.tab.c"
     }
     yystack.s_mark -= yym;
     yystate = *yystack.s_mark;
